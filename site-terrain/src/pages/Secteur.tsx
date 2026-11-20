@@ -6,10 +6,6 @@ import { Entete, EnTetePage } from "../components/Chrome";
 const SECTEURS = ["LF", "NISSAN", "ST"] as const;
 type Secteur = (typeof SECTEURS)[number];
 
-const DESCRIPTIONS: Partial<Record<Secteur, string>> = {
-  LF: "Ligne de filtrage",
-};
-
 export default function PageSecteur() {
   const navigate = useNavigate();
   const { etat, maj, referentiel } = useRapport();
@@ -56,7 +52,6 @@ export default function PageSecteur() {
         <ul className="monter d1 mt-7 grid gap-3">
           {secteurs.map((s, index) => {
             const actif = etat.secteur === s.code;
-            const description = DESCRIPTIONS[s.code];
             return (
               <li key={s.code}>
                 <button
@@ -85,11 +80,6 @@ export default function PageSecteur() {
                   <span className="relative z-10 min-w-0 flex-1">
                     <span className="flex items-baseline gap-2.5">
                       <span className="display text-[1.9rem] leading-none">{s.code}</span>
-                      {description && (
-                        <span className={`text-[10px] ${actif ? "text-white/55" : "text-acier"}`}>
-                          {description}
-                        </span>
-                      )}
                     </span>
                     <span className={`mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] ${actif ? "text-white/65" : "text-acier"}`}>
                       {s.unites !== null && s.emplacements !== null ? (
