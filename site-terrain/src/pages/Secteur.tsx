@@ -1,16 +1,10 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useRapport } from "../context/RapportContext";
-import { Entete, EnTetePage, Note } from "../components/Chrome";
+import { Entete, EnTetePage } from "../components/Chrome";
 
 const SECTEURS = ["LF", "NISSAN", "ST"] as const;
 type Secteur = (typeof SECTEURS)[number];
-
-const DESCRIPTIONS: Record<Secteur, string> = {
-  LF: "Ligne de filtrage",
-  NISSAN: "Atelier traitement",
-  ST: "Station de pompage",
-};
 
 export default function PageSecteur() {
   const navigate = useNavigate();
@@ -86,9 +80,6 @@ export default function PageSecteur() {
                   <span className="relative z-10 min-w-0 flex-1">
                     <span className="flex items-baseline gap-2.5">
                       <span className="display text-[1.9rem] leading-none">{s.code}</span>
-                      <span className={`text-[10px] ${actif ? "text-white/55" : "text-acier"}`}>
-                        {DESCRIPTIONS[s.code]}
-                      </span>
                     </span>
                     <span className={`mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] ${actif ? "text-white/65" : "text-acier"}`}>
                       {s.unites !== null && s.emplacements !== null ? (
@@ -120,13 +111,6 @@ export default function PageSecteur() {
             );
           })}
         </ul>
-
-        <div className="monter d2 mt-6">
-          <Note>
-            Aucun compte n'est nécessaire. Vos réponses sont transmises au serveur à la fin du contrôle et restent
-            consultables par la supervision.
-          </Note>
-        </div>
 
         <div className="monter d3 mt-8 flex items-center justify-between border-t border-sable/80 pt-4">
           <span className="etiquette text-[8px] text-acier">Douches de sécurité · v2</span>
